@@ -35,7 +35,7 @@ struct ThemeInfo
 
 static const ThemeInfo themeInfos[] = {
   { ThemeType::Default, "Default", ":/Default/Default.kvconfig", ":/Default/Default.svg", ""},
-  { ThemeType::FTI, "FTI", ":/FTILight/FTILight.kvconfig", ":/FTILight/FTILight.svg", "" },
+  { ThemeType::FTI, "FTI", ":/FTI/FTI.kvconfig", ":/FTI/FTI.svg", "" },
   { ThemeType::FTIDark, "FTIDark", ":/FTIDark/FTIDark.kvconfig", ":/FTIDark/FTIDark.svg", "" },
   { ThemeType::Blossom, "Blossom", ":/Blossom/Blossom.kvconfig", ":/Blossom/Blossom.svg", "" },
   { ThemeType::Charcoal, "Charcoal", ":/Charcoal/Charcoal.kvconfig", ":/Charcoal/Charcoal.svg", "" },
