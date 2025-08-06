@@ -1,0 +1,8 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/FTIDark">
+        <file>FTIDark.kvconfig</file>
+        <file>FTIDark.svg</file>
+        <file>FTIDark.colors</file>
+    </qresource>
+</RCC>

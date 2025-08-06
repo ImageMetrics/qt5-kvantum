@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(cmake:*)",
+      "Bash(./config_build_relwithdeb.bat)",
+      "Bash(cp:*)",
+      "Bash(rm:*)"
+    ],
+    "deny": []
+  }
+}
