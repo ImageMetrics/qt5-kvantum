@@ -27,7 +27,7 @@ int main(int argc, char* argv[])
     std::cout << "Loading " << themeInfo->name << " theme..." << std::endl;
     
     // Initialize default theme resources
-    Q_INIT_RESOURCE(defaulttheme);
+    Q_INIT_RESOURCE(Default);
     
     // Create Kvantum style with default theme configuration
     Kvantum::Style* kvantumStyle = new Kvantum::Style(

@@ -41,6 +41,7 @@ file(GLOB_RECURSE KVANTUM_HEADERS CONFIGURE_DEPENDS
 )
 # Define only the themes we want to include
 set(KVANTUM_THEMES
+    bin/themes/kvantum/Default/Default.qrc
     bin/themes/kvantum/Blossom/Blossom.qrc
     bin/themes/kvantum/Charcoal/Charcoal.qrc
     bin/themes/kvantum/Adapta/Adapta.qrc
@@ -64,8 +65,7 @@ set(KVANTUM_THEMES
 add_library(Kvantum STATIC
     ${KVANTUM_SOURCES}
     ${KVANTUM_HEADERS}
-    ${KVANTUM_THEMES}
-    default/defaulttheme.qrc)
+    ${KVANTUM_THEMES})
 
 target_link_libraries(Kvantum Qt5::Widgets Qt5::Core Qt5::Svg)
 target_include_directories(Kvantum PRIVATE "${CMAKE_CURRENT_LIST_DIR}/src")

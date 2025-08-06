@@ -162,11 +162,11 @@ void MainWindow::on_btnApply_clicked()
     // Initialize the resource for the selected theme
     switch (themeInfo->type)
     {
+        case ThemeType::FTI:
+            Q_INIT_RESOURCE(FTILight);
+            break;
         case ThemeType::FTIDark:
             Q_INIT_RESOURCE(FTIDark);
-            break;
-        case ThemeType::FTILight:
-            Q_INIT_RESOURCE(FTILight);
             break;
         case ThemeType::Blossom:
             Q_INIT_RESOURCE(Blossom);
@@ -180,15 +180,6 @@ void MainWindow::on_btnApply_clicked()
         case ThemeType::AdaptaNokto:
             Q_INIT_RESOURCE(AdaptaNokto);
             break;
-        case ThemeType::KvAdapta:
-            Q_INIT_RESOURCE(KvAdapta);
-            break;
-        case ThemeType::KvAdaptaDark:
-            Q_INIT_RESOURCE(KvAdaptaDark);
-            break;
-        case ThemeType::KvAmbiance:
-            Q_INIT_RESOURCE(KvAmbiance);
-            break;
         case ThemeType::KvArc:
             Q_INIT_RESOURCE(KvArc);
             break;
@@ -198,14 +189,8 @@ void MainWindow::on_btnApply_clicked()
         case ThemeType::KvGnome:
             Q_INIT_RESOURCE(KvGnome);
             break;
-        case ThemeType::KvGnomeAlt:
-            Q_INIT_RESOURCE(KvGnomeAlt);
-            break;
         case ThemeType::KvGnomeDark:
             Q_INIT_RESOURCE(KvGnomeDark);
-            break;
-        case ThemeType::KvOxygen:
-            Q_INIT_RESOURCE(KvOxygen);
             break;
         case ThemeType::KvSimplicity:
             Q_INIT_RESOURCE(KvSimplicity);
@@ -213,12 +198,18 @@ void MainWindow::on_btnApply_clicked()
         case ThemeType::KvSimplicityDark:
             Q_INIT_RESOURCE(KvSimplicityDark);
             break;
+        case ThemeType::KvAmbiance:
+            Q_INIT_RESOURCE(KvAmbiance);
+            break;
+        case ThemeType::KvOxygen:
+            Q_INIT_RESOURCE(KvOxygen);
+            break;
         case ThemeType::Retrosmart:
             Q_INIT_RESOURCE(Retrosmart);
             break;
         case ThemeType::Default:
         default:
-            Q_INIT_RESOURCE(defaulttheme);
+            Q_INIT_RESOURCE(Default);
             break;
     }
 
