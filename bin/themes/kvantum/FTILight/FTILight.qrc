@@ -1,8 +1,0 @@
-<!DOCTYPE RCC>
-<RCC version="1.0">
-    <qresource prefix="/FTILight">
-        <file>FTILight.kvconfig</file>
-        <file>FTILight.svg</file>
-        <file>FTILight.colors</file>
-    </qresource>
-</RCC>

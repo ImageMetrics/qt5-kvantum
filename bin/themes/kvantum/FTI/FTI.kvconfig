@@ -1,6 +1,6 @@
 [%General]
 author=FTI
-comment=A FTI Light version of KvGnome
+comment=A FTI version of KvGnome
 x11drag=all
 alt_mnemonic=true
 left_tabs=false

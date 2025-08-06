@@ -46,8 +46,8 @@ set(KVANTUM_THEMES
     bin/themes/kvantum/Charcoal/Charcoal.qrc
     bin/themes/kvantum/Adapta/Adapta.qrc
     bin/themes/kvantum/AdaptaNokto/AdaptaNokto.qrc
+    bin/themes/kvantum/FTI/FTI.qrc
     bin/themes/kvantum/FTIDark/FTIDark.qrc
-    bin/themes/kvantum/FTILight/FTILight.qrc
     bin/themes/kvantum/KvAdapta/KvAdapta.qrc
     bin/themes/kvantum/KvAdaptaDark/KvAdaptaDark.qrc
     bin/themes/kvantum/KvAmbiance/KvAmbiance.qrc

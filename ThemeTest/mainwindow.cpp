@@ -163,7 +163,7 @@ void MainWindow::on_btnApply_clicked()
     switch (themeInfo->type)
     {
         case ThemeType::FTI:
-            Q_INIT_RESOURCE(FTILight);
+            Q_INIT_RESOURCE(FTI);
             break;
         case ThemeType::FTIDark:
             Q_INIT_RESOURCE(FTIDark);

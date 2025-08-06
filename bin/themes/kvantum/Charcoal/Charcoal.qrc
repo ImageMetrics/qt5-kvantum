@@ -1,6 +1,6 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
-    <qresource prefix="/Charcoal">
+    <qresource prefix="Charcoal">
         <file>Charcoal.kvconfig</file>
         <file>Charcoal.svg</file>
     </qresource>
