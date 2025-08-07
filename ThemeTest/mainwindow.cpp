@@ -69,11 +69,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    auto* table_model = new TableModel();
-    ui->tableView1->setModel(table_model);
-    ui->tableView2->setModel(table_model);
-    ui->listView1->setModel(table_model);
-    ui->listView2->setModel(table_model);
+    // Table/list models removed since Views tab was removed
 
     // Populate dropdown with all available embedded themes
     for (const auto& themeInfo : themeInfos)
