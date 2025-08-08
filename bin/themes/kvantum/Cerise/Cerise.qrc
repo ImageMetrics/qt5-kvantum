@@ -1,0 +1,7 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+<qresource prefix="Cerise">
+    <file>Cerise.kvconfig</file>
+    <file>Cerise.svg</file>
+</qresource>
+</RCC>

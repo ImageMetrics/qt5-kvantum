@@ -1,8 +1,0 @@
-<!DOCTYPE RCC>
-<RCC version="1.0">
-    <qresource prefix="FTI">
-        <file>FTI.kvconfig</file>
-        <file>FTI.svg</file>
-        <file>FTI.colors</file>
-    </qresource>
-</RCC>

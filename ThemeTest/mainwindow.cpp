@@ -158,14 +158,23 @@ void MainWindow::on_btnApply_clicked()
     // Initialize the resource for the selected theme
     switch (themeInfo->type)
     {
-        case ThemeType::FTI:
-            Q_INIT_RESOURCE(FTI);
-            break;
-        case ThemeType::FTIDark:
-            Q_INIT_RESOURCE(FTIDark);
+        case ThemeType::KvGnomeAlt:
+          Q_INIT_RESOURCE(KvGnomeAlt);
+          break;
+        case ThemeType::KvGnomeAltDark:
+            Q_INIT_RESOURCE(KvGnomeAltDark);
             break;
         case ThemeType::Blossom:
             Q_INIT_RESOURCE(Blossom);
+            break;
+        case ThemeType::Cerise:
+            Q_INIT_RESOURCE(Cerise);
+            break;
+        case ThemeType::Meteorite:
+            Q_INIT_RESOURCE(Meteorite);
+            break;
+        case ThemeType::Cobalt:
+            Q_INIT_RESOURCE(Cobalt);
             break;
         case ThemeType::Charcoal:
             Q_INIT_RESOURCE(Charcoal);

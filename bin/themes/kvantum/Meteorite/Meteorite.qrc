@@ -1,0 +1,7 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+<qresource prefix="Meteorite">
+    <file>Meteorite.kvconfig</file>
+    <file>Meteorite.svg</file>
+</qresource>
+</RCC>

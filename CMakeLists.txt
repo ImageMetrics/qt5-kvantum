@@ -43,11 +43,12 @@ file(GLOB_RECURSE KVANTUM_HEADERS CONFIGURE_DEPENDS
 set(KVANTUM_THEMES
     bin/themes/kvantum/Default/Default.qrc
     bin/themes/kvantum/Blossom/Blossom.qrc
+    bin/themes/kvantum/Cerise/Cerise.qrc
+    bin/themes/kvantum/Meteorite/Meteorite.qrc
+    bin/themes/kvantum/Cobalt/Cobalt.qrc
     bin/themes/kvantum/Charcoal/Charcoal.qrc
     bin/themes/kvantum/Adapta/Adapta.qrc
     bin/themes/kvantum/AdaptaNokto/AdaptaNokto.qrc
-    bin/themes/kvantum/FTI/FTI.qrc
-    bin/themes/kvantum/FTIDark/FTIDark.qrc
     bin/themes/kvantum/KvAdapta/KvAdapta.qrc
     bin/themes/kvantum/KvAdaptaDark/KvAdaptaDark.qrc
     bin/themes/kvantum/KvAmbiance/KvAmbiance.qrc
@@ -55,6 +56,7 @@ set(KVANTUM_THEMES
     bin/themes/kvantum/KvArcDark/KvArcDark.qrc
     bin/themes/kvantum/KvGnome/KvGnome.qrc
     bin/themes/kvantum/KvGnomeAlt/KvGnomeAlt.qrc
+    bin/themes/kvantum/KvGnomeAltDark/KvGnomeAltDark.qrc
     bin/themes/kvantum/KvGnomeDark/KvGnomeDark.qrc
     bin/themes/kvantum/KvOxygen/KvOxygen.qrc
     bin/themes/kvantum/KvSimplicity/KvSimplicity.qrc
