@@ -3,6 +3,5 @@
     <qresource prefix="/FTICeriseDark">
         <file>FTICeriseDark.kvconfig</file>
         <file>FTICeriseDark.svg</file>
-        <file>FTICeriseDark.colors</file>
     </qresource>
 </RCC>

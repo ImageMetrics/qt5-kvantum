@@ -3,6 +3,5 @@
     <qresource prefix="/FTICobalt">
         <file>FTICobalt.kvconfig</file>
         <file>FTICobalt.svg</file>
-        <file>FTICobalt.colors</file>
     </qresource>
 </RCC>
