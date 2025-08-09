@@ -1,0 +1,8 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/FTIMeteoriteDark">
+        <file>FTIMeteoriteDark.kvconfig</file>
+        <file>FTIMeteoriteDark.svg</file>
+        <file>FTIMeteoriteDark.colors</file>
+    </qresource>
+</RCC>

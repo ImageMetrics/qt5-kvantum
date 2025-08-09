@@ -158,26 +158,29 @@ void MainWindow::on_btnApply_clicked()
     // Initialize the resource for the selected theme
     switch (themeInfo->type)
     {
-        case ThemeType::KvGnomeAlt:
-          Q_INIT_RESOURCE(KvGnomeAlt);
-          break;
-        case ThemeType::KvGnomeAltDark:
-            Q_INIT_RESOURCE(KvGnomeAltDark);
-            break;
         case ThemeType::Blossom:
             Q_INIT_RESOURCE(Blossom);
             break;
-        case ThemeType::Cerise:
-            Q_INIT_RESOURCE(Cerise);
-            break;
-        case ThemeType::Meteorite:
-            Q_INIT_RESOURCE(Meteorite);
-            break;
-        case ThemeType::Cobalt:
-            Q_INIT_RESOURCE(Cobalt);
-            break;
         case ThemeType::Charcoal:
             Q_INIT_RESOURCE(Charcoal);
+            break;
+        case ThemeType::FTICerise:
+            Q_INIT_RESOURCE(FTICerise);
+            break;
+        case ThemeType::FTICeriseDark:
+            Q_INIT_RESOURCE(FTICeriseDark);
+            break;
+        case ThemeType::FTICobalt:
+            Q_INIT_RESOURCE(FTICobalt);
+            break;
+        case ThemeType::FTICobaltDark:
+            Q_INIT_RESOURCE(FTICobaltDark);
+            break;
+        case ThemeType::FTIMeteorite:
+            Q_INIT_RESOURCE(FTIMeteorite);
+            break;
+        case ThemeType::FTIMeteoriteDark:
+            Q_INIT_RESOURCE(FTIMeteoriteDark);
             break;
         case ThemeType::Adapta:
             Q_INIT_RESOURCE(Adapta);
@@ -205,6 +208,9 @@ void MainWindow::on_btnApply_clicked()
             break;
         case ThemeType::KvAmbiance:
             Q_INIT_RESOURCE(KvAmbiance);
+            break;
+        case ThemeType::KvGnomeAlt:
+            Q_INIT_RESOURCE(KvGnomeAlt);
             break;
         case ThemeType::KvOxygen:
             Q_INIT_RESOURCE(KvOxygen);

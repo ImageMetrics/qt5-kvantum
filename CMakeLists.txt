@@ -43,12 +43,15 @@ file(GLOB_RECURSE KVANTUM_HEADERS CONFIGURE_DEPENDS
 set(KVANTUM_THEMES
     bin/themes/kvantum/Default/Default.qrc
     bin/themes/kvantum/Blossom/Blossom.qrc
-    bin/themes/kvantum/Cerise/Cerise.qrc
-    bin/themes/kvantum/Meteorite/Meteorite.qrc
-    bin/themes/kvantum/Cobalt/Cobalt.qrc
     bin/themes/kvantum/Charcoal/Charcoal.qrc
     bin/themes/kvantum/Adapta/Adapta.qrc
     bin/themes/kvantum/AdaptaNokto/AdaptaNokto.qrc
+    bin/themes/kvantum/FTICerise/FTICerise.qrc
+    bin/themes/kvantum/FTICeriseDark/FTICeriseDark.qrc
+    bin/themes/kvantum/FTICobalt/FTICobalt.qrc
+    bin/themes/kvantum/FTICobaltDark/FTICobaltDark.qrc
+    bin/themes/kvantum/FTIMeteorite/FTIMeteorite.qrc
+    bin/themes/kvantum/FTIMeteoriteDark/FTIMeteoriteDark.qrc
     bin/themes/kvantum/KvAdapta/KvAdapta.qrc
     bin/themes/kvantum/KvAdaptaDark/KvAdaptaDark.qrc
     bin/themes/kvantum/KvAmbiance/KvAmbiance.qrc
@@ -56,7 +59,6 @@ set(KVANTUM_THEMES
     bin/themes/kvantum/KvArcDark/KvArcDark.qrc
     bin/themes/kvantum/KvGnome/KvGnome.qrc
     bin/themes/kvantum/KvGnomeAlt/KvGnomeAlt.qrc
-    bin/themes/kvantum/KvGnomeAltDark/KvGnomeAltDark.qrc
     bin/themes/kvantum/KvGnomeDark/KvGnomeDark.qrc
     bin/themes/kvantum/KvOxygen/KvOxygen.qrc
     bin/themes/kvantum/KvSimplicity/KvSimplicity.qrc
@@ -78,6 +80,7 @@ add_executable(Test
     ThemeTest/main.cpp
     ThemeTest/mainwindow.cpp
     ThemeTest/mainwindow.h
+    ThemeTest/ThemeInfo.h
     ThemeTest/mainwindow.ui
     ThemeTest/ThemeTest.qrc)
 
