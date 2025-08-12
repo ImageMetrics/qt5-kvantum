@@ -17,6 +17,8 @@ public:
 
 private:
     void RestyleWindow();
+    void ClearAllStylesheets();
+    void ForceWidgetUpdate();
 
 private slots:
     void on_btnApply_clicked();

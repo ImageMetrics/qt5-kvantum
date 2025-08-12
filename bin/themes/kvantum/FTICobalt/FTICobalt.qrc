@@ -1,0 +1,7 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/FTICobalt">
+        <file>FTICobalt.kvconfig</file>
+        <file>FTICobalt.svg</file>
+    </qresource>
+</RCC>

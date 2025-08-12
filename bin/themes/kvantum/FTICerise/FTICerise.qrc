@@ -1,0 +1,7 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/FTICerise">
+        <file>FTICerise.kvconfig</file>
+        <file>FTICerise.svg</file>
+    </qresource>
+</RCC>

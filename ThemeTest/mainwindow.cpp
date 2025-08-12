@@ -10,6 +10,7 @@
 #include <QTimer>
 
 #include <Kvantum.h>
+#include "ThemeInfo.h"
 
 #include <vector>
 
@@ -74,14 +75,56 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->listView1->setModel(table_model);
     ui->listView2->setModel(table_model);
 
-    QDir path("Themes/kvantum/");
-    QStringList files = path.entryList(QDir::Dirs | QDir::NoDot | QDir::NoDotDot);
-    ui->cmbSvgThemes->addItems(files);
+    // Populate dropdown with all available embedded themes
+    for (const auto& themeInfo : themeInfos)
+    {
+        ui->cmbSvgThemes->addItem(themeInfo.name);
+    }
+    
+    // Set the current theme in the dropdown based on the active style
+    Kvantum::Style* currentStyle = qobject_cast<Kvantum::Style*>(qApp->style());
+    if (currentStyle)
+    {
+        // Default to first item if we can't determine current theme
+        ui->cmbSvgThemes->setCurrentIndex(0);
+        ui->lblTheme->setText(QString("Current Theme: %1").arg(ui->cmbSvgThemes->currentText()));
+    }
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::ClearAllStylesheets()
+{
+    // Clear application stylesheet
+    qApp->setStyleSheet("");
+    
+    // Clear all widget-specific stylesheets and reset palettes
+    foreach (QWidget* widget, qApp->allWidgets())
+    {
+        if (widget)
+        {
+            widget->setStyleSheet("");
+            // Reset widget palette to system default
+            widget->setPalette(qApp->style()->standardPalette());
+        }
+    }
+}
+
+void MainWindow::ForceWidgetUpdate()
+{
+    // Force all widgets to update with new theme
+    foreach (QWidget* widget, qApp->allWidgets())
+    {
+        if (widget)
+        {
+            widget->style()->unpolish(widget);
+            widget->style()->polish(widget);
+            widget->update();
+        }
+    }
 }
 
 void MainWindow::RestyleWindow()
@@ -104,27 +147,95 @@ void MainWindow::RestyleWindow()
 
 void MainWindow::on_btnApply_clicked()
 {
-    QString dir = "Themes/Kvantum/";
-
     QString theme_name = ui->cmbSvgThemes->currentText();
-    QString config_file  = dir + theme_name + "/" + theme_name + ".kvconfig";
-    QString svg_file     = dir + theme_name + "/" + theme_name + ".svg";
-    QString color_config = dir + theme_name + "/" + theme_name + ".colors";
-    if (!QFile::exists(color_config))
-        color_config.clear();
-
-    // get the current style engine, it's expected to be kvantum,
-    // if not then bork
-    QStyle* style = qApp->style();
-
-    // this hack is done so that this executable doesn't need to
-    // link against kvantum.dll
-    QVariant hack = style->property("__kvantum_theme_hack");
-    if (hack.isValid())
+    
+    // Get theme info from our embedded themes
+    const ThemeInfo* themeInfo = getThemeInfo(theme_name);
+    
+    // IMPORTANT: First clear all stylesheets and reset to clean state
+    // This prevents themes from leaving persistent colors/styles
+    ClearAllStylesheets();
+    
+    // Force widget updates to ensure clean state before applying new theme
+    ForceWidgetUpdate();
+    
+    // Initialize the resource for the selected theme
+    switch (themeInfo->type)
     {
-        void* ptr = qvariant_cast<void*>(hack);
-        auto* theme_changer = static_cast<Kvantum::IKvantumThemeChanger*>(ptr);
-        if (!theme_changer->setTheme(style, config_file, svg_file, color_config)) {
+        case ThemeType::Blossom:
+            Q_INIT_RESOURCE(Blossom);
+            break;
+        case ThemeType::Charcoal:
+            Q_INIT_RESOURCE(Charcoal);
+            break;
+        case ThemeType::FTICerise:
+            Q_INIT_RESOURCE(FTICerise);
+            break;
+        case ThemeType::FTICeriseDark:
+            Q_INIT_RESOURCE(FTICeriseDark);
+            break;
+        case ThemeType::FTICobalt:
+            Q_INIT_RESOURCE(FTICobalt);
+            break;
+        case ThemeType::FTICobaltDark:
+            Q_INIT_RESOURCE(FTICobaltDark);
+            break;
+        case ThemeType::FTIMeteorite:
+            Q_INIT_RESOURCE(FTIMeteorite);
+            break;
+        case ThemeType::FTIMeteoriteDark:
+            Q_INIT_RESOURCE(FTIMeteoriteDark);
+            break;
+        case ThemeType::Adapta:
+            Q_INIT_RESOURCE(Adapta);
+            break;
+        case ThemeType::AdaptaNokto:
+            Q_INIT_RESOURCE(AdaptaNokto);
+            break;
+        case ThemeType::KvArc:
+            Q_INIT_RESOURCE(KvArc);
+            break;
+        case ThemeType::KvArcDark:
+            Q_INIT_RESOURCE(KvArcDark);
+            break;
+        case ThemeType::KvGnome:
+            Q_INIT_RESOURCE(KvGnome);
+            break;
+        case ThemeType::KvGnomeDark:
+            Q_INIT_RESOURCE(KvGnomeDark);
+            break;
+        case ThemeType::KvSimplicity:
+            Q_INIT_RESOURCE(KvSimplicity);
+            break;
+        case ThemeType::KvSimplicityDark:
+            Q_INIT_RESOURCE(KvSimplicityDark);
+            break;
+        case ThemeType::KvAmbiance:
+            Q_INIT_RESOURCE(KvAmbiance);
+            break;
+        case ThemeType::KvGnomeAlt:
+            Q_INIT_RESOURCE(KvGnomeAlt);
+            break;
+        case ThemeType::KvOxygen:
+            Q_INIT_RESOURCE(KvOxygen);
+            break;
+        case ThemeType::Retrosmart:
+            Q_INIT_RESOURCE(Retrosmart);
+            break;
+        case ThemeType::Default:
+        default:
+            Q_INIT_RESOURCE(Default);
+            break;
+    }
+
+    // Get the current style - with static linking, we can cast directly
+    Kvantum::Style* kvantumStyle = qobject_cast<Kvantum::Style*>(qApp->style());
+    
+    if (kvantumStyle)
+    {
+        // Use the setTheme method to switch themes
+        if (!kvantumStyle->setTheme(themeInfo->configPath, themeInfo->svgPath, themeInfo->colorPath))
+        {
             QMessageBox msg(this);
             msg.setStandardButtons(QMessageBox::Ok);
             msg.setText("Failed to load the theme.");
@@ -133,9 +244,14 @@ void MainWindow::on_btnApply_clicked()
             msg.exec();
             return;
         }
-        qApp->setPalette(style->standardPalette());
+        
+        // Apply the new palette
+        qApp->setPalette(kvantumStyle->standardPalette());
+        
+        // Update label with current theme
         ui->lblTheme->setText(QString("Current Theme: %1").arg(theme_name));
-
+        
+        // Final step: Restyle all windows with the new theme
         RestyleWindow();
     }
     else

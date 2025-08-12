@@ -1,0 +1,7 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/FTIMeteorite">
+        <file>FTIMeteorite.kvconfig</file>
+        <file>FTIMeteorite.svg</file>
+    </qresource>
+</RCC>

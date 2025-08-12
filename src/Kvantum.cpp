@@ -196,13 +196,13 @@ Style::~Style()
   }
   if (opacityTimer_)
   {
-    opacityTimer_->stop();
+    if (opacityTimer_) opacityTimer_->stop();
     delete opacityTimer_;
     opacityTimer_ = nullptr;
   }
   if (opacityTimerOut_)
   {
-    opacityTimerOut_->stop();
+    if (opacityTimerOut_) opacityTimerOut_->stop();
     delete opacityTimerOut_;
     opacityTimerOut_ = nullptr;
   }
@@ -419,7 +419,9 @@ void Style::removeAnimation(QObject *animation)
 void Style::setAnimationOpacity()
 { //qDebug() << animationOpacity_;
   if (animationOpacity_ >= 100 || !animatedWidget_)
-    opacityTimer_->stop();
+  {
+    if (opacityTimer_) opacityTimer_->stop();
+  }
   else
   {
     if (animationOpacity_ <= 100 - OPACITY_STEP)
@@ -433,7 +435,7 @@ void Style::setAnimationOpacity()
 void Style::setAnimationOpacityOut()
 { //qDebug() << animatedWidgetOut_;
   if (animationOpacityOut_ >= 100 || !animatedWidgetOut_)
-    opacityTimerOut_->stop();
+    if (opacityTimerOut_) opacityTimerOut_->stop();
   else
   {
     if (animationOpacityOut_ <= 100 - OPACITY_STEP)
@@ -792,9 +794,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       if (animatedWidget_ && animatedWidget_ != w
           && !w->inherits("QComboBoxPrivateContainer")) // Qt4
       {
-        if (opacityTimer_->isActive())
+        if (opacityTimer_ && opacityTimer_->isActive())
         {
-          opacityTimer_->stop();
+          if (opacityTimer_) opacityTimer_->stop();
           animationOpacity_ = 100;
           animatedWidget_->update();
         }
@@ -816,7 +818,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           animationStartState_.append("-inactive");
         animatedWidget_ = w;
         animationOpacity_ = 0;
-        opacityTimer_->start(ANIMATION_FRAME);
+        if (opacityTimer_) opacityTimer_->start(ANIMATION_FRAME);
       }
       else if (qobject_cast<QScrollBar*>(o) || qobject_cast<QSlider*>(o))
       {
@@ -825,7 +827,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           animationStartState_.append("-inactive");
         animatedWidget_ = w;
         animationOpacity_ = 0;
-        opacityTimer_->start(ANIMATION_FRAME);
+        if (opacityTimer_) opacityTimer_->start(ANIMATION_FRAME);
       }
     }
     break;
@@ -837,9 +839,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           && !((tspec_.combo_as_lineedit || tspec_.square_combo_button) && qobject_cast<QComboBox*>(o)->lineEdit()))
       { // QEvent::MouseButtonPress may follow this
         if (animatedWidget_ // the cusror may have been on the popup scrollbar
-            && opacityTimer_->isActive())
+            && opacityTimer_ && opacityTimer_->isActive())
         {
-          opacityTimer_->stop();
+          if (opacityTimer_) opacityTimer_->stop();
           animationOpacity_ = 100;
           animatedWidget_->update();
         }
@@ -852,7 +854,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         }
         animatedWidget_ = w;
         animationOpacity_ = 0;
-        opacityTimer_->start(ANIMATION_FRAME);
+        if (opacityTimer_) opacityTimer_->start(ANIMATION_FRAME);
       }
       else
       {
@@ -867,14 +869,14 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         {
           /* disable animation if focus-in happens immediately after focus-out
              for exactly the same area to prevent flashing */
-          if (opacityTimerOut_->isActive()
+          if (opacityTimerOut_ && opacityTimerOut_->isActive()
               && (animatedWidgetOut_ == w
                   || (animatedWidgetOut_ != nullptr
                       && !animatedWidgetOut_->isVisible()
                       && animatedWidgetOut_->size() == w->size()
                       && animatedWidgetOut_->mapToGlobal(QPoint(0,0)) == w->mapToGlobal(QPoint(0,0)))))
           {
-            opacityTimerOut_->stop();
+            if (opacityTimerOut_) opacityTimerOut_->stop();
             animationOpacityOut_ = 100;
             animatedWidgetOut_ = nullptr;
             /* although there will be no animation after this, animationStartStateOut_ doesn't need
@@ -891,9 +893,9 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                 break;
               }
             }
-            if (opacityTimer_->isActive())
+            if (opacityTimer_ && opacityTimer_->isActive())
             {
-              opacityTimer_->stop();
+              if (opacityTimer_) opacityTimer_->stop();
               animationOpacity_ = 100;
               animatedWidget_->update();
             }
@@ -901,7 +903,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           animationStartState_ = "normal";
           animatedWidget_ = w;
           animationOpacity_ = 0;
-          opacityTimer_->start(ANIMATION_FRAME);
+          if (opacityTimer_) opacityTimer_->start(ANIMATION_FRAME);
         }
       }
     }
@@ -921,22 +923,22 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       {
         /* disable animation if focus-out happens immediately after focus-in
            for exactly the same area to prevent flashing */
-        if (opacityTimer_->isActive()
+        if (opacityTimer_ && opacityTimer_->isActive()
             && (animatedWidget_ == w
                 || (animatedWidget_ != nullptr
                     && !animatedWidget_->isVisible()
                     && animatedWidget_->size() == w->size()
                     && animatedWidget_->mapToGlobal(QPoint(0,0)) == w->mapToGlobal(QPoint(0,0)))))
         {
-          opacityTimer_->stop();
+          if (opacityTimer_) opacityTimer_->stop();
           animationOpacity_ = 100;
           animatedWidget_ = nullptr;
           animationStartState_ = "normal"; // should be set; no animation after this
           break;
         }
-        if (animatedWidgetOut_ && opacityTimerOut_->isActive())
+        if (animatedWidgetOut_ && opacityTimerOut_ && opacityTimerOut_->isActive())
         {
-          opacityTimerOut_->stop();
+          if (opacityTimerOut_) opacityTimerOut_->stop();
           animationOpacityOut_ = 100;
           animatedWidgetOut_->update();
         }
@@ -949,7 +951,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           animationStartStateOut_ = "focused";
         animatedWidgetOut_ = w;
         animationOpacityOut_ = 0;
-        opacityTimerOut_->start(ANIMATION_FRAME);
+        if (opacityTimerOut_) opacityTimerOut_->start(ANIMATION_FRAME);
       }
     }
     break;
@@ -976,11 +978,11 @@ bool Style::eventFilter(QObject *o, QEvent *e)
            by using styleObject (groupboxes are always checkable here) */
         animatedWidget_ = w;
       }
-      else if (!opacityTimer_->isActive())
+      else if (!opacityTimer_ || !opacityTimer_->isActive())
       {
         animatedWidget_ = w;
         animationOpacity_ = 0;
-        opacityTimer_->start(ANIMATION_FRAME);
+        if (opacityTimer_) opacityTimer_->start(ANIMATION_FRAME);
       }
     }
     break;
@@ -993,7 +995,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     {
       if (qobject_cast<QAbstractButton*>(o) || qobject_cast<QGroupBox*>(o))
       {
-        if (opacityTimer_->isActive() && animatedWidget_)
+        if (opacityTimer_ && opacityTimer_->isActive() && animatedWidget_)
         { // finish the previous animation, whether in this widget or not
           if (animatedWidget_ == w)
           {
@@ -1002,7 +1004,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           }
           else
           {
-            opacityTimer_->stop();
+            if (opacityTimer_) opacityTimer_->stop();
             animationOpacity_ = 100;
             animatedWidget_->update();
           }
@@ -1015,15 +1017,15 @@ bool Style::eventFilter(QObject *o, QEvent *e)
                || qobject_cast<QScrollBar*>(o) || qobject_cast<QSlider*>(o))
       {
         if (animatedWidget_ && animatedWidget_ != w
-            && opacityTimer_->isActive())
+            && opacityTimer_ && opacityTimer_->isActive())
         {
-          opacityTimer_->stop();
+          if (opacityTimer_) opacityTimer_->stop();
           animationOpacity_ = 100;
           animatedWidget_->update();
         }
         animatedWidget_ = w;
         animationOpacity_ = 0;
-        opacityTimer_->start(ANIMATION_FRAME);
+        if (opacityTimer_) opacityTimer_->start(ANIMATION_FRAME);
       }
     }
     break;
@@ -1047,7 +1049,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
     {
       if (qobject_cast<QAbstractButton*>(o) || qobject_cast<QGroupBox*>(o))
       {
-        if (opacityTimer_->isActive() && animatedWidget_)
+        if (opacityTimer_ && opacityTimer_->isActive() && animatedWidget_)
         {
           if (animatedWidget_ == w)
           {
@@ -1056,7 +1058,7 @@ bool Style::eventFilter(QObject *o, QEvent *e)
           }
           else
           {
-            opacityTimer_->stop();
+            if (opacityTimer_) opacityTimer_->stop();
             animationOpacity_ = 100;
             animatedWidget_->update();
           }
@@ -1067,15 +1069,15 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       else
       {
         if (animatedWidget_ && animatedWidget_ != w
-            && opacityTimer_->isActive())
+            && opacityTimer_ && opacityTimer_->isActive())
         {
-          opacityTimer_->stop();
+          if (opacityTimer_) opacityTimer_->stop();
           animationOpacity_ = 100;
           animatedWidget_->update();
         }
         animatedWidget_ = w;
         animationOpacity_ = 0;
-        opacityTimer_->start(ANIMATION_FRAME);
+        if (opacityTimer_) opacityTimer_->start(ANIMATION_FRAME);
       }
     }
     break;
@@ -1498,8 +1500,8 @@ bool Style::eventFilter(QObject *o, QEvent *e)
       }
       /* let the state animation continue (not necessary but useful
          for better flash prevention -- see FocusIn and FocusOut) */
-      else if ((animatedWidget_ == w && opacityTimer_->isActive())
-               || (animatedWidgetOut_ == w && opacityTimerOut_->isActive()))
+      else if ((animatedWidget_ == w && opacityTimer_ && opacityTimer_->isActive())
+               || (animatedWidgetOut_ == w && opacityTimerOut_ && opacityTimerOut_->isActive()))
       {
         break;
       }
@@ -1526,13 +1528,13 @@ bool Style::eventFilter(QObject *o, QEvent *e)
         {
           if (animatedWidget_ == w)
           {
-            opacityTimer_->stop();
+            if (opacityTimer_) opacityTimer_->stop();
             animatedWidget_ = nullptr;
             animationOpacity_ = 100;
           }
           if (animatedWidgetOut_ == w)
           {
-            opacityTimerOut_->stop();
+            if (opacityTimerOut_) opacityTimerOut_->stop();
             animatedWidgetOut_ = nullptr;
             animationOpacityOut_ = 100;
           }
@@ -2740,8 +2742,8 @@ void Style::drawPrimitive(PrimitiveElement element,
                      && !animationStartState.isEmpty());
         if (animate && animationStartState == status)
         {
-          if (opacityTimer_->isActive())
-            opacityTimer_->stop();
+          if (opacityTimer_ && opacityTimer_->isActive())
+            if (opacityTimer_) opacityTimer_->stop();
           animationOpacity_ = 0;
           animate = false;
         }
@@ -2751,10 +2753,10 @@ void Style::drawPrimitive(PrimitiveElement element,
         {
           if (animate)
           {
-            if (!opacityTimer_->isActive())
+            if (opacityTimer_ && !opacityTimer_->isActive())
             {
               animationOpacity_ = 0;
-              opacityTimer_->start(ANIMATION_FRAME);
+              if (opacityTimer_) opacityTimer_->start(ANIMATION_FRAME);
             }
             if (animationOpacity_ < 100
                 && (!autoraise || !animationStartState.startsWith("normal") || drawRaised))
@@ -2787,10 +2789,10 @@ void Style::drawPrimitive(PrimitiveElement element,
         // auto-raised fade out animation
         else if (animate && !animationStartState.startsWith("normal"))
         {
-          if (!opacityTimer_->isActive())
+          if (opacityTimer_ && !opacityTimer_->isActive())
           {
             animationOpacity_ = 0;
-            opacityTimer_->start(ANIMATION_FRAME);
+            if (opacityTimer_) opacityTimer_->start(ANIMATION_FRAME);
           }
           if (animationOpacity_ < 100)
           {
@@ -2915,17 +2917,17 @@ void Style::drawPrimitive(PrimitiveElement element,
                   && !qobject_cast<const QAbstractScrollArea*>(widget);
         if (animate && animationStartState == suffix)
         {
-          if (opacityTimer_->isActive())
-            opacityTimer_->stop();
+          if (opacityTimer_ && opacityTimer_->isActive())
+            if (opacityTimer_) opacityTimer_->stop();
           animationOpacity_ = 0;
           animate = false;
         }
         if (animate)
         {
-          if (!opacityTimer_->isActive())
+          if (opacityTimer_ && !opacityTimer_->isActive())
           {
             animationOpacity_ = 0;
-            opacityTimer_->start(ANIMATION_FRAME);
+            if (opacityTimer_) opacityTimer_->start(ANIMATION_FRAME);
           }
           if (animationOpacity_ < 100)
             renderElement(painter, ispec.element+animationStartState, option->rect);
@@ -3012,17 +3014,17 @@ void Style::drawPrimitive(PrimitiveElement element,
                    && !qobject_cast<const QAbstractScrollArea*>(widget);
         if (animate && animationStartState == suffix)
         {
-          if (opacityTimer_->isActive())
-            opacityTimer_->stop();
+          if (opacityTimer_ && opacityTimer_->isActive())
+            if (opacityTimer_) opacityTimer_->stop();
           animationOpacity_ = 0;
           animate = false;
         }
         if (animate)
         {
-          if (!opacityTimer_->isActive())
+          if (opacityTimer_ && !opacityTimer_->isActive())
           {
             animationOpacity_ = 0;
-            opacityTimer_->start(ANIMATION_FRAME);
+            if (opacityTimer_) opacityTimer_->start(ANIMATION_FRAME);
           }
           if (animationOpacity_ < 100)
             renderElement(painter, ispec.element+animationStartState, option->rect);
@@ -8349,8 +8351,8 @@ void Style::drawControl(ControlElement element,
                        && !qobject_cast<const QAbstractScrollArea*>(widget));
           if (animate && animationStartState == status)
           {
-            if (opacityTimer_->isActive())
-              opacityTimer_->stop();
+            if (opacityTimer_ && opacityTimer_->isActive())
+              if (opacityTimer_) opacityTimer_->stop();
             animationOpacity_ = 0;
             animate = false;
           }
@@ -8358,10 +8360,10 @@ void Style::drawControl(ControlElement element,
           {
             if (animate)
             {
-              if (!opacityTimer_->isActive())
+              if (opacityTimer_ && !opacityTimer_->isActive())
               {
                 animationOpacity_ = 0;
-                opacityTimer_->start(ANIMATION_FRAME);
+                if (opacityTimer_) opacityTimer_->start(ANIMATION_FRAME);
               }
               if (animationOpacity_ < 100
                   && (!(opt->features & QStyleOptionButton::Flat)
@@ -8394,10 +8396,10 @@ void Style::drawControl(ControlElement element,
           // fade out animation
           else if (animate && !animationStartState.startsWith("normal"))
           {
-            if (!opacityTimer_->isActive())
+            if (opacityTimer_ && !opacityTimer_->isActive())
             {
               animationOpacity_ = 0;
-              opacityTimer_->start(ANIMATION_FRAME);
+              if (opacityTimer_) opacityTimer_->start(ANIMATION_FRAME);
             }
             if (animationOpacity_ < 100)
             {

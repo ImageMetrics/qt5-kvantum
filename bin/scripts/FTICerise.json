@@ -1,0 +1,27 @@
+{
+  "variables": {
+    "primary": "#D91B5D",
+    "light": "#E0427A",
+    "dark": "#821038",
+    "background": "#E2E2E2"
+  },
+  "source_theme": "KvGnome",
+  "destination_theme": "FTICerise",
+  "author": "FTI",
+  "comment": "FTI Cerise theme with variables - based on KvGnome",
+  "animate_states": false,
+  "kvconfig_colors": {
+    "#4a90d9": "${primary}",
+    "#4d92d9": "${light}",
+    "#e9e9e9": "${background}"
+  },
+  "svg_colors": {
+    "#4a90d9": "${primary}",
+    "#4d92d9": "${light}",
+    "#e9e9e9": "${background}",
+    "#2a77c6": "${dark}",
+    "#b74aff": "${dark}",
+    "#3daee9": "${primary}",
+    "#58acff": "${light}"
+  }
+}

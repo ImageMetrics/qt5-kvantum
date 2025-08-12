@@ -23,7 +23,7 @@ if %ERRORLEVEL% NEQ 0 (
     exit /b %ERRORLEVEL%
 )
 
-echo Building qt5-dark-theme RelWithDebInfo configuration...
+echo Building qt5-kvantum RelWithDebInfo configuration...
 echo.
 
 REM Check if the solution exists

@@ -1,0 +1,30 @@
+{
+  "variables": {
+    "primary": "#4558A5",
+    "light": "#6273B8",
+    "dark": "#2A3563",
+    "background": "#E2E2E2"
+  },
+  "source_theme": "KvGnomeDark",
+  "destination_theme": "FTICobaltDark",
+  "author": "FTI",
+  "comment": "FTI Cobalt Dark theme based on KvGnomeDark with custom color scheme",
+  "animate_states": false,
+  "kvconfig_colors": {
+    "#215d9c": "${primary}",
+    "#4a90d9": "${primary}",
+    "#3180d3": "${light}"
+  },
+  "svg_colors": {
+    "#348AE4": "${primary}",
+    "#215d9c": "${primary}",
+    "#4a90d9": "${primary}",
+    "#3180d3": "${light}",
+    "#20456c": "${dark}",
+    "#2a76c6": "${light}",
+    "#2a77c6": "${dark}",
+    "#b74aff": "${dark}",
+    "#3daee9": "${primary}",
+    "#58acff": "${light}"
+  }
+}
